@@ -1,0 +1,45 @@
+Here are all the nouns identified in the text:
+
+1. Lesson
+2. Lessons
+3. Group
+4. Number
+5. Places
+6. Students
+7. Instrument
+8. Levels
+9. Beginner
+10. Intermediate
+11. Advanced
+12. Ensembles
+13. Genre
+14. Punk rock
+15. Gospel band
+16. Time slots
+17. Appointments [x]
+18. Dentist [x]
+19. Staff
+20. Instructor
+21. Person
+22. Name
+23. Address
+24. Contact details
+25. Contact person
+26. Parent
+27. Siblings
+28. Discount
+29. Instructor Payment
+30. Salaries
+31. Pricing scheme
+32. Prices
+33. Flexibility
+34. Wind
+35. String
+36. Brands
+37. Quantities
+38. Stock
+39. Period
+40. Lease
+41. Instruments
+42. Fee
+43. Quota
