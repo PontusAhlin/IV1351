@@ -30,9 +30,10 @@ ALTER TABLE group_lesson ADD CONSTRAINT PK_group_lesson PRIMARY KEY (id);
 CREATE TABLE instructor (
  id INT GENERATED ALWAYS AS IDENTITY NOT NULL,
  ensemble_proficiency BOOLEAN NOT NULL,
- person_number VARCHAR(12) NOT NULL --UNIQUE ,
- ,first_name VARCHAR(200) NOT NULL,
- last_name VARCHAR(200) NOT NULL
+ person_number VARCHAR(12) NOT NULL,
+ first_name VARCHAR(200) NOT NULL,
+ last_name VARCHAR(200) NOT NULL,
+ UNIQUE(person_number)
 );
 
 ALTER TABLE instructor ADD CONSTRAINT PK_instructor PRIMARY KEY (id);
@@ -111,10 +112,11 @@ ALTER TABLE specified_instruments_instructor ADD CONSTRAINT PK_specified_instrum
 
 CREATE TABLE student (
  id INT GENERATED ALWAYS AS IDENTITY NOT NULL,
- person_number VARCHAR(12) NOT NULL,--UNIQUE 
+ person_number VARCHAR(12) NOT NULL,
  first_name VARCHAR(200) NOT NULL,
  last_name VARCHAR(200) NOT NULL,
- student_id INT
+ student_id INT,
+ UNIQUE(person_number)
 );
 
 ALTER TABLE student ADD CONSTRAINT PK_student PRIMARY KEY (id);
@@ -200,11 +202,12 @@ ALTER TABLE discount ADD CONSTRAINT PK_discount PRIMARY KEY (price_reduction,stu
 
 
 CREATE TABLE email (
- email VARCHAR(200) NOT NULL,--UNIQUE 
- contact_detail_id INT NOT NULL
+ email VARCHAR(200) NOT NULL,
+ contact_detail_id INT NOT NULL,
+ UNIQUE(email)
 );
 
-ALTER TABLE email ADD CONSTRAINT PK_email PRIMARY KEY (email,contact_detail_id); --UNIQUE email 
+ALTER TABLE email ADD CONSTRAINT PK_email PRIMARY KEY (email,contact_detail_id); 
 
 
 CREATE TABLE location (
@@ -217,11 +220,12 @@ ALTER TABLE location ADD CONSTRAINT PK_location PRIMARY KEY (location_id);
 
 
 CREATE TABLE phone_number (
- phone_number VARCHAR(12) NOT NULL,--UNIQUE 
- contact_detail_id INT NOT NULL
+ phone_number VARCHAR(12) NOT NULL, 
+ contact_detail_id INT NOT NULL,
+ UNQIUE(phone_number)
 );
 
-ALTER TABLE phone_number ADD CONSTRAINT PK_phone_number PRIMARY KEY (phone_number ,contact_detail_id);--UNIQUE phone_number
+ALTER TABLE phone_number ADD CONSTRAINT PK_phone_number PRIMARY KEY (phone_number ,contact_detail_id);
 
 
 ALTER TABLE instrument_quantity ADD CONSTRAINT FK_instrument_quantity_0 FOREIGN KEY (instrument_id) REFERENCES instrument_for_renting (instrument_id);
