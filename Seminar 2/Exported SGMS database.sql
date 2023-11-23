@@ -2,7 +2,8 @@ CREATE TABLE enrollment (
  enrollment_id INT GENERATED ALWAYS AS IDENTITY NOT NULL,
  intstrument_to_learn VARCHAR(200) NOT NULL,
  room_left BOOLEAN NOT NULL,
- skill_level VARCHAR(12) NOT NULL
+ skill_level VARCHAR(12) NOT NULL,
+  CHECK(skill_level IN ('Beginner', 'Intermediate', 'Advanced'))
 );
 
 ALTER TABLE enrollment ADD CONSTRAINT PK_enrollment PRIMARY KEY (enrollment_id);
@@ -21,7 +22,8 @@ ALTER TABLE ensemble ADD CONSTRAINT PK_ensemble PRIMARY KEY (id);
 CREATE TABLE group_lesson (
  id INT GENERATED ALWAYS AS IDENTITY NOT NULL,
  minimum_students INT NOT NULL,
- skill_level VARCHAR(12) NOT NULL
+ skill_level VARCHAR(12) NOT NULL,
+  CHECK(skill_level IN ('Beginner', 'Intermediate', 'Advanced'))
 );
 
 ALTER TABLE group_lesson ADD CONSTRAINT PK_group_lesson PRIMARY KEY (id);
@@ -60,8 +62,9 @@ CREATE TABLE lesson (
  id INT GENERATED ALWAYS AS IDENTITY NOT NULL,
  instrument_type VARCHAR(200) NOT NULL,
  skill_level VARCHAR(12) NOT NULL,
- appointed_time TIMESTAMP(10) NOT NULL
-);
+ appointed_time TIMESTAMP(10) NOT NULL,
+ CHECK(skill_level IN ('Beginner', 'Intermediate', 'Advanced'))
+ );
 
 ALTER TABLE lesson ADD CONSTRAINT PK_lesson PRIMARY KEY (id);
 
