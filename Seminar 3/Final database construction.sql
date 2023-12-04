@@ -9,7 +9,6 @@ ALTER TABLE enrollment ADD CONSTRAINT PK_enrollment PRIMARY KEY (enrollment_id);
 
 
 CREATE TABLE instructor (
-
  id SERIAL ,
  ensemble_proficiency BOOLEAN NOT NULL,
  person_number VARCHAR(12) NOT NULL,

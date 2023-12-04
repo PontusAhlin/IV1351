@@ -1,7 +1,7 @@
 --1st Query--
 
 SELECT 
-    CASE EXTRACT(MONTH FROM coalesce(ts_gls.time_slot, ls.appointed_time, ts_ens.time_slot))
+    CASE EXTRACT(MONTH FROM COALESCE(ts_gls.time_slot, ls.appointed_time, ts_ens.time_slot))
         WHEN 1 THEN 'January'
         WHEN 2 THEN 'February'
         WHEN 3 THEN 'March'
@@ -23,7 +23,6 @@ FROM price_for_lessons AS pfl
 	LEFT JOIN lesson AS ls ON pfl.price_id = ls.price_id 
 	LEFT JOIN group_lesson AS gls ON pfl.price_id = gls.price_id
 	LEFT JOIN ensemble AS ens ON pfl.price_id = ens.price_id
-
 	LEFT JOIN time_slot AS ts_gls ON gls.id = ts_gls.group_lesson_id  
 	LEFT JOIN time_slot AS ts_ens ON ens.id = ts_ens.ensemble_id 
 	WHERE EXTRACT(YEAR FROM COALESCE(ts_gls.time_slot, ls.appointed_time, ts_ens.time_slot)) = 2023
@@ -47,11 +46,13 @@ ORDER BY siblings;
 
 --3rd Query--
 
+UPDATE time_slot SET time_slot = '2023-12-08 12:00:00' WHERE id = 4;
+
 SELECT 
     inst.id AS instructor_id,
     inst.first_name,
     inst.last_name,
-    COUNT(DISTINCT COALESCE(les.id, ts_gl.group_lesson_id, ts_ens.ensemble_id)) AS number_of_lessons
+    COUNT(DISTINCT COALESCE(ts_gl.group_lesson_id, ts_ens.ensemble_id,les.id)) AS number_of_lessons
 FROM
     instructor AS inst 
 LEFT JOIN lesson AS les ON les.instructor_id = inst.id 
@@ -66,8 +67,9 @@ WHERE
 GROUP BY inst.id, inst.first_name, inst.last_name
 ORDER BY number_of_lessons DESC;
 
-
 --4th Query--
+
+UPDATE time_slot SET time_slot = '2023-12-08 12:00:00' WHERE id = 4;
 
 SELECT 
 	CASE EXTRACT(DOW FROM ts.time_slot)
@@ -80,7 +82,7 @@ SELECT
         WHEN 6 THEN 'Saturday'
 	END AS day_held,
     en.genre_played AS genre,
-    en.max_allowed_students AS max_seats,
+    en.max_allowed_students AS total_seats,
     COUNT(DISTINCT se.student_id) AS occupied_seats,
 	en.max_allowed_students - COUNT(DISTINCT se.student_id) AS remaining_seats,
 	CASE 
@@ -98,3 +100,6 @@ GROUP BY
     day_held, genre, total_seats
 ORDER BY 
 	total_seats DESC;
+
+
+
