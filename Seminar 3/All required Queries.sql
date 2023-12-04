@@ -67,10 +67,7 @@ GROUP BY inst.id, inst.first_name, inst.last_name
 ORDER BY number_of_lessons DESC;
 
 
-
 --4th Query--
-
-
 
 SELECT 
 	CASE EXTRACT(DOW FROM ts.time_slot)
@@ -83,7 +80,7 @@ SELECT
         WHEN 6 THEN 'Saturday'
 	END AS day_held,
     en.genre_played AS genre,
-    en.max_allowed_students AS total_seats,
+    en.max_allowed_students AS max_seats,
     COUNT(DISTINCT se.student_id) AS occupied_seats,
 	en.max_allowed_students - COUNT(DISTINCT se.student_id) AS remaining_seats,
 	CASE 
